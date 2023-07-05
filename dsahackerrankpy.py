@@ -558,3 +558,22 @@ for i in range (0,T):
         print (int(a)//int(b))
     except Exception as e:
         print ("Error Code:",e)
+
+# # # # # THIS MUCH TOOK ME TO GOLD BADGE PYTHON # # # #
+
+# # # # # HACKERRANK NUMBER LINE JUMPS
+def kangaroo(x1, v1, x2, v2):
+    sum1 = x1 + v1
+    sum2 = x2 + v2
+    while (sum1 != sum2 and x1 >= 0 and x2 > 0 and v1 >= 1 and v2 >= 1 and x1 < x2 and sum1 <= 10000000):            
+            sum1 = x1 + v1
+            x1 += v1
+            sum2 = x2 + v2
+            x2 += v2
+    if (sum1 == sum2):
+            return ("YES")
+    else:
+            return ("NO")
+        
+y = kangaroo(0,2,5,3)
+print(y)
