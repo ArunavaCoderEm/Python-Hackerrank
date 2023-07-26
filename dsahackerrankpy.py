@@ -607,3 +607,206 @@ if __name__ == '__main__':
     b = int(input().strip())
 
     bonAppetit(bill, k, b)
+
+
+# # # HACKERRANK SUB-ARRAY DIVISION
+
+import math
+import os
+import random
+import re
+import sys
+
+def birthday(s, d, m):
+    count = 0
+    for i in range (0,len(s)-m+1):
+        x = 0
+        for j in range (i,i+m):
+            x += s[j]
+        if (x == d):
+            count += 1
+    return (count)            
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input().strip())
+
+    s = list(map(int, input().rstrip().split()))
+
+    first_multiple_input = input().rstrip().split()
+
+    d = int(first_multiple_input[0])
+
+    m = int(first_multiple_input[1])
+
+    result = birthday(s, d, m)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
+
+# # # HACKERRANK COUNTING VALLEYS
+def countingValleys(steps, path):
+    valley = 0
+    seaL = 0
+    for i in range (0,steps):
+        if (path[i] == 'U'):
+            seaL += 1
+        elif (path[i] == 'D'):
+            seaL -= 1
+        if (seaL == 0 and path[i] == 'U'):
+            valley += 1
+    print(valley)
+
+# # # # HACKERRANK DAY OF A PROGRAMMER 
+
+def dayOfProgrammer(year):
+    if (year >= 1700 and year <= 1917):
+        if (year % 4 == 0):
+            date = f'12.09.{year}'
+        else :
+            date = f'13.09.{year}'
+    if (year == 1918):
+        date = f'31.08.{year}'
+    if (year >= 1919 and year <= 2700):
+        if (year % 400 == 0 and year % 100 == 0):
+            date = f'12.09.{year}'
+        elif (year % 4 == 0 and year % 100 != 0):
+            date = f'12.09.{year}'
+        else :
+            date = f'13.09.{year}'
+    return date
+
+# # # HACKERRANK DESIGNER PDF VIEWER
+import math
+import os
+import random
+import re
+import sys
+
+
+
+def designerPdfViewer(h, word):
+    l = int(len(word))
+    alph = []
+    for i in range (0,l):
+            if (word[i] == 'a'):
+                    alph.append(h[0])
+            if (word[i] == 'b'):
+                    alph.append(h[1])
+            if (word[i] == 'c'):
+                    alph.append(h[2])
+            if (word[i] == 'd'):
+                    alph.append(h[3])
+            if (word[i] == 'e'):
+                    alph.append(h[4])
+            if (word[i] == 'f'):
+                    alph.append(h[5])
+            if (word[i] == 'g'):
+                    alph.append(h[6])
+            if (word[i] == 'h'):
+                    alph.append(h[7])
+            if (word[i] == 'i'):
+                    alph.append(h[8])
+            if (word[i] == 'j'):
+                    alph.append(h[9])
+            if (word[i] == 'k'):
+                    alph.append(h[10])
+            if (word[i] == 'l'):
+                    alph.append(h[11])
+            if (word[i] == 'm'):
+                    alph.append(h[12])
+            if (word[i] == 'n'):
+                    alph.append(h[13])
+            if (word[i] == 'o'):
+                    alph.append(h[14])
+            if (word[i] == 'p'):
+                    alph.append(h[15])
+            if (word[i] == 'q'):
+                    alph.append(h[16])
+            if (word[i] == 'r'):
+                    alph.append(h[17])
+            if (word[i] == 's'):
+                    alph.append(h[18])
+            if (word[i] == 't'):
+                    alph.append(h[19])
+            if (word[i] == 'u'):
+                    alph.append(h[20])
+            if (word[i] == 'v'):
+                    alph.append(h[21])
+            if (word[i] == 'w'):
+                    alph.append(h[22])
+            if (word[i] == 'x'):
+                    alph.append(h[23])
+            if (word[i] == 'y'):
+                    alph.append(h[24])
+            if (word[i] == 'z'):
+                    alph.append(h[25])
+    area = max(alph)*l    
+    return area   
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    h = list(map(int, input().rstrip().split()))
+
+    word = input()
+
+    result = designerPdfViewer(h, word)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
+
+# # # HACKERRANK SALES BY MATCH
+import math
+import os
+import random
+import re
+import sys
+
+
+def sockMerchant(n, ar):
+    setar = list(set(ar))
+    count = []
+    sum = 0
+    for i in range (0, len(setar)):
+        x = ar.count(setar[i])
+        count.append(x)
+
+    for j in range (0, len(count)):
+        if (count[j] % 2 == 0):
+            sum += (count[j] // 2 )
+        elif (count[j] % 2 != 0 and count[j] > 2):
+            if ((count[j]-1) % 2 == 0):
+                sum += ((count[j]-1) // 2 )
+    return (sum)
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input().strip())
+
+    ar = list(map(int, input().rstrip().split()))
+
+    result = sockMerchant(n, ar)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
+
+# # # # HACKERRANK CAMELCASE
+
+import math
+import os
+import random
+import re
+import sys
+
+def camelcase(s):
+    count = 1
+    for i in range (0,len(s)):
+        if (ord(s[i]) >= 65 and ord(s[i]) <= 90):
+            count += 1
+    return (count)
