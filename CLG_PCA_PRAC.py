@@ -89,3 +89,27 @@ for i in x:
         print("Not pangram")
 print('pangram')
     
+## robot move
+inix,iniy = 0,0
+m = 'y'
+while(m != 'n'):
+    dir = input("(up/down/left/right) which direction ? ").lower()
+    if(dir == 'up'):
+        h = int(input("How much up ? "))
+        iniy += h
+    
+    if(dir == 'down'):
+        h = int(input("How much down ? "))
+        iniy -= h
+    
+    if(dir == 'right'):
+        h = int(input("How much right ? "))
+        inix += h
+    
+    if(dir == 'left'):
+        h = int(input("How much left ? "))
+        inix -= h
+    m = input("wanna move robot again ? (y/n) - ")
+print(inix,iniy)
+dis = ((inix ** 2) + (iniy ** 2))**0.5
+print(f"Robot is {dis} distance from origin")
