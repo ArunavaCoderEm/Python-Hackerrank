@@ -118,3 +118,11 @@ while(m != 'n'):
 print(inix,iniy)
 dis = ((inix ** 2) + (iniy ** 2))**0.5
 print(f"Robot is {dis} distance from origin")
+
+# combination of any number
+import itertools
+num = 123
+nums = list(str(num))
+nums = [int(i) for i in nums]
+comb = list(itertools.permutations(nums, len(nums)))
+print(comb)
