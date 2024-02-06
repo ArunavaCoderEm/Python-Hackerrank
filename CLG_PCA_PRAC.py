@@ -34,13 +34,13 @@ while(v != 'n'):
     v = input("wanna play more ? (y // n) - ").lower()
 
 
-# HANGMAN
+## HANGMAN
 word_pool = ["kitty", "dog", "teeth", "sitting"]
 word = word_pool[0]  
 encoded_word = ["_"] * len(word)
 print(" ".join(encoded_word))
 human = ['head','body','hands','legs']
-while(len(human) != 0 and encoded_word != guess):
+while(len(human) != 0):
     guess = input("Which letter do you want to guess? ")
     if guess in word:
         print(f"Yes, {guess} is correct!")
@@ -53,10 +53,12 @@ while(len(human) != 0 and encoded_word != guess):
         print(f"No, {guess} isn't correct!")
         hang = human.pop()
         print(f"{hang} HANGED ! Remains {human}")
+    if("".join(encoded_word) == word):
+        break
 
 if(encoded_word != guess and len(human) == 0):
     print("You lose human hanged")
-elif(encoded_word != guess and len(human) != 0):
+elif(encoded_word == word and len(human) != 0):
     print("you win human not hanged")
 
 # Guess Number
