@@ -162,3 +162,14 @@ def check(i,p):
             pl += 1
         if(len(p) == pl): return True
     return False
+
+# prisoners
+
+prisoners = list(map(int, input("Please enter prisoner arrangement - : ").strip()))
+freed = 0
+toggle = True
+for i in range(len(prisoners)):
+  if (prisoners[i] and toggle) or (not prisoners[i] and not toggle):
+    freed += 1  
+    toggle = not toggle
+print(freed)
