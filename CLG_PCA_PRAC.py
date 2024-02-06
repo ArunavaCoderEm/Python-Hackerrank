@@ -126,3 +126,28 @@ nums = list(str(num))
 nums = [int(i) for i in nums]
 comb = list(itertools.permutations(nums, len(nums)))
 print(comb)
+
+
+#beta variate
+import random
+import matplotlib.pyplot as plt 
+l = 5
+h = 10
+n = []
+for i in range (100):
+    temp = random.betavariate(l,h)
+    n.append(temp)
+plt.hist(n)
+plt.show()
+
+## gammavariate
+import random
+import matplotlib.pyplot as plt 
+l = 5
+h = 10
+n = []
+for i in range (100):
+    temp = random.gammavariate(l,h)
+    n.append(temp)
+plt.hist(n)
+plt.show()
