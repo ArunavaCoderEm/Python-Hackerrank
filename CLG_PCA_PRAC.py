@@ -151,3 +151,14 @@ for i in range (100):
     n.append(temp)
 plt.hist(n)
 plt.show()
+
+# ordered string ordered dict
+from collections import OrderedDict
+def check(i,p):
+    d = OrderedDict.fromkeys(i)
+    pl = 0
+    for i,j in d.items():
+        if(i == p[pl]):
+            pl += 1
+        if(len(p) == pl): return True
+    return False
