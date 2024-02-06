@@ -82,12 +82,15 @@ while(m != 'n'):
     m = input('wanna play more (y // n) ? ')
 
 #pangram
-x = 'abcdefghijklmnopqrstuvwx'
+def pan(sentence):
+    x = 'abcdefghijklmnopqrstuvwx'
+    for i in x:
+        if(i not in sentence):
+            return False
+    return True
 sentence = input("enter - ").lower()
-for i in x:
-    if(i not in sentence):
-        print("Not pangram")
-print('pangram')
+if(pan(sentence)):print("pangram")
+else:print('not pangram')
     
 ## robot move
 inix,iniy = 0,0
