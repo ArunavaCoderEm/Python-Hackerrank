@@ -175,7 +175,7 @@ for i in range(len(prisoners)):
 print(freed)
 
 
-## A * 
+# A *
 
 import heapq
 
@@ -184,8 +184,8 @@ def astar(graph, heur, start, goal):
     heapq.heappush(pq, (heur[start], start))
     parent = {}
     gs = {node: float('inf') for node in graph}
-    gs[start] = 0
     fs = {node: float('inf') for node in graph}
+    gs[start] = 0
     fs[start] = heur[start]   
     while (pq):
         nown = heapq.heappop(pq)[1]  
@@ -231,3 +231,42 @@ start = input("Enter Start Node - ")
 goal = input("Enter Goal Node - ")
 path = astar(graphm, heur, start, goal)
 print(f"Path: {path}")
+
+
+## DFS and BFS
+
+visd = set()
+def graphd():
+    graph = {}
+    n = int(input("Enter total vertex - "))
+    for i in range(n):
+        node = input(f"Enter {i+1} Vertex - ")
+        nei = map(str,input(f"Enter neighbours of {node} - "))
+        if(nei): graph[node] = list(nei)
+        else: graph[node] = []
+    return graph
+
+def dfs(graph,visd,start):
+    if(start not in visd):
+        print(start,end=" -> ")
+        visd.add(start)
+    for n in graph[start]:
+        dfs(graph,visd,n)
+
+g = graphd()
+dfs(g,visd,'A')
+print("\n\n")
+visb = []
+q = []
+def bfs(graph,visb,start):
+    if(start not in visb):
+        visb.append(start)
+        q.append(start)
+    while(q):
+        node = q.pop(0)
+        print(node, end=" -> ")
+        for n in graph[node]:
+            if(n not in visb):
+                visb.append(n)
+                q.append(n)
+bfs(g,visb,'A')
