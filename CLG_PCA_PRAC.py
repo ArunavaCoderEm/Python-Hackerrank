@@ -173,3 +173,61 @@ for i in range(len(prisoners)):
     freed += 1  
     toggle = not toggle
 print(freed)
+
+
+## A * 
+
+import heapq
+
+def astar(graph, heur, start, goal):
+    pq = []
+    heapq.heappush(pq, (heur[start], start))
+    parent = {}
+    gs = {node: float('inf') for node in graph}
+    gs[start] = 0
+    fs = {node: float('inf') for node in graph}
+    fs[start] = heur[start]   
+    while (pq):
+        nown = heapq.heappop(pq)[1]  
+        if (nown == goal):
+            return pathcons(parent, nown)      
+        for nei, cost in graph[nown]:
+            tgn = gs[nown] + int(cost)
+            if (tgn < gs[nei]):
+                parent[nei] = nown
+                gs[nei] = tgn
+                fs[nei] = tgn + heur[nei]
+                if (nei not in [i[1] for i in pq]):
+                    heapq.heappush(pq, (fs[nei], nei))  
+    return None
+def pathcons(parent, nown):
+    total_path = [nown]
+    while (nown in parent):
+        nown = parent[nown]
+        total_path.append(nown)
+    total_path.reverse()
+    return total_path
+def graphA():
+    graph = {}
+    n = int(input("Enter Number of vertex here - "))
+    for i in range(n):
+        node = input(f"Enter {i+1}th Node - ")
+        nei = []
+        neigh = input(f"Enter neightbour of {node} - (eg- BC) - ")
+        for j in list(neigh):
+            k = int(input(f"Enter cost of {j} - "))
+            nei.append((str(j),int(k)))
+        graph[node] = nei
+    return graph
+graphm = graphA()
+def heuristic():
+    heu = {}
+    for i in graphm.keys():
+        c = int(input(f"Enter heuristic cost of {i} - "))
+        heu[i] = c
+    return heu
+heur = heuristic()
+start = input("Enter Start Node - ")
+goal = input("Enter Goal Node - ")
+path = astar(graphm, heur, start, goal)
+print(f"Path: {path}")
