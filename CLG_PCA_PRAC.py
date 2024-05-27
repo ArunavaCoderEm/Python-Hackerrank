@@ -179,34 +179,32 @@ print(freed)
 
 import heapq
 
-def astar(graph, heur, start, goal):
+def conspath(parent, nown):
+    target = [nown]
+    while(nown in parent):
+        nown = parent[nown]
+        target.append(nown)
+    target.reverse()
+    return target
+def astar(graph,heur,start,goal):
     pq = []
-    heapq.heappush(pq, (heur[start], start))
     parent = {}
-    gs = {node: float('inf') for node in graph}
-    fs = {node: float('inf') for node in graph}
-    gs[start] = 0
-    fs[start] = heur[start]   
-    while (pq):
-        nown = heapq.heappop(pq)[1]  
-        if (nown == goal):
-            return pathcons(parent, nown)      
+    heapq.heappush(pq,(heur[start],start))
+    gs = {node:float('inf') for node in graph}
+    fs = {node:float('inf') for node in graph}
+    while(pq):
+        nown = heapq.heappop(pq)[1]
+        if(nown == goal):
+            return conspath(parent,nown)
         for nei, cost in graph[nown]:
             tgn = gs[nown] + int(cost)
-            if (tgn < gs[nei]):
-                parent[nei] = nown
+            if(tgn < gs[nei]):
                 gs[nei] = tgn
+                parent[nei] = nown
                 fs[nei] = tgn + heur[nei]
-                if (nei not in [i[1] for i in pq]):
-                    heapq.heappush(pq, (fs[nei], nei))  
+                if(nei not in [i[1] for i in pq]):
+                    heapq.heappush(pq,(fs[nei],nei))
     return None
-def pathcons(parent, nown):
-    total_path = [nown]
-    while (nown in parent):
-        nown = parent[nown]
-        total_path.append(nown)
-    total_path.reverse()
-    return total_path
 def graphA():
     graph = {}
     n = int(input("Enter Number of vertex here - "))
@@ -233,7 +231,7 @@ path = astar(graphm, heur, start, goal)
 print(f"Path: {path}")
 
 
-## DFS and BFS
+# DFS and BFS
 
 visd = set()
 def graphd():
