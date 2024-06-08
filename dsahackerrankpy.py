@@ -839,7 +839,7 @@ class Solution:
             for m in range(j+2, len(nums) + 1):
                 if(numsum[m] - numsum[j]) % k == 0: return True
         return False
-    
+     
 sol = Solution()
 x = sol.checkSubarraySum([23,2,6,4,7],13)
 print(x)   
