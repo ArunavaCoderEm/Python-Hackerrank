@@ -843,3 +843,24 @@ class Solution:
 sol = Solution()
 x = sol.checkSubarraySum([23,2,6,4,7],13)
 print(x)   
+
+
+class Solution:
+    def valueAfterKSeconds(self, n: int, k: int) -> int:
+        mod = (10**9) + 7
+        res = [1]*n
+        presum = [1]*(n)
+        j = 0
+        while(j < k):
+            for i in range(1,n):
+                presum[i] = res[i] + presum[i-1]
+            res = presum
+            j += 1
+        ansp = presum[-1]
+        ans = ansp % mod
+        return ans
+        
+    
+sol = Solution()
+x = sol.valueAfterKSeconds(5,3)
+print(x)
