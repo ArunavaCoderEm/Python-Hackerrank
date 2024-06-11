@@ -864,3 +864,40 @@ class Solution:
 sol = Solution()
 x = sol.valueAfterKSeconds(5,3)
 print(x)
+
+from typing import List
+from collections import Counter
+import numpy as np
+
+class Solution:
+    def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
+        c = Counter(arr1)
+        res = []
+        for i in arr2:
+            res += [i]*c[i]
+            del c[i]
+        resi = sorted(c)
+        for j in resi:
+            res += [j] * c[j]
+        return res
+
+sol = Solution()
+print(sol.relativeSortArray([2,3,1,3,2,4,6,7,9,2,19],[2,1,4,3,9,6]))
+
+def diff(a,b):
+    return a-b
+class Solution:
+    def getStrongest(self, arr: List[int], k: int) -> List[int]:
+        med = int (np.median(arr))
+        print(med)
+        res = []
+        for i in range(len(arr)):
+            res.append([abs(arr[i] - med), arr[i]])
+        res.sort()
+        res.reverse()
+        ans = []
+        for j in range (k):
+            ans.append(res[j][1])
+        return ans
+sol = Solution()
+print(sol.getStrongest([1,2,3,4,5],2))
