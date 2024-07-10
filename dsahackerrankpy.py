@@ -973,3 +973,19 @@ class Solution:
 
 sol = Solution()
 print(sol.maximumSwap(9973))
+
+from typing import List
+
+class Solution:
+    def minOperations(self, logs: List[str]) -> int:
+        stack = []
+        for i in logs:
+            if(i != "../" and i != './'): stack.append(i)
+            elif(i == './'): continue
+            elif(len(stack) and i == '../'):
+                stack.pop()
+            print(stack)
+        return len(stack)
+    
+sol = Solution()
+print(sol.minOperations(["d1/","d2/","../","d21/","./"]))
