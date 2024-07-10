@@ -989,3 +989,71 @@ class Solution:
     
 sol = Solution()
 print(sol.minOperations(["d1/","d2/","../","d21/","./"]))
+
+from typing import List, Optional
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution:
+    def nodesBetweenCriticalPoints(self, head: Optional[ListNode]) -> List[int]:
+	    
+        pos = 2
+        criticalpts = []
+        
+        if (head is None or head.next is None or head.next.next is None):
+            return [-1, -1]
+
+        start = head
+        mid = start.next
+        end = mid.next
+        
+        while (end):
+            if(mid.val > start.val and mid.val > end.val): 
+                criticalpts.append(pos)
+            if(mid.val < start.val and mid.val < end.val): 
+                criticalpts.append(pos)
+                
+            start = mid
+            mid = start.next
+            end = mid.next
+            pos += 1
+        
+        if(len(criticalpts) == 2): 
+            maxdiff = abs(criticalpts[0] - criticalpts[1])
+            mindiff = abs(criticalpts[0] - criticalpts[1]) 
+            return [mindiff, maxdiff]
+        
+        print(criticalpts)
+        if(len(criticalpts) < 2): return [-1,-1]
+
+        maxdiff = abs(criticalpts[0] - criticalpts[-1])
+        mindiff = float("inf") 
+        
+        for i in range(0,len(criticalpts) - 1):
+            mindiff = min(mindiff, abs(criticalpts[i] - criticalpts[i + 1]))
+        
+        return [mindiff, maxdiff]
+
+
+# Drivers code
+ 
+head = ListNode(5)
+temp1 = ListNode(3)
+temp2 = ListNode(1)
+temp3 = ListNode(2)
+temp4 = ListNode(5)
+temp5 = ListNode(1)
+temp6 = ListNode(2)
+
+head.next = temp1
+temp1.next = temp2
+temp2.next = temp3
+temp3.next = temp4
+temp4.next = temp5
+temp5.next = temp6
+
+sol = Solution()
+print(sol.nodesBetweenCriticalPoints(head))
