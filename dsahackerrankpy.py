@@ -1146,3 +1146,50 @@ class Solution:
         retres = "".join(stk)
         
         return "0" if (retres == "") else retres
+
+
+from typing import List, Optional
+
+
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+        
+class Solution:
+    def numComponents(self, head: Optional[ListNode], nums: List[int]) -> int:
+        
+        num_set = set(nums)
+        compo = 0
+        
+        if(len(nums) == 1): return 1
+        if(head == None): return None
+        if(head.next == None):
+            x = head.val
+            if(x in nums): return 1
+            
+        temp = head
+        
+        print(nums)
+        
+        while(temp != None):
+            if (temp.val in num_set and (temp.next is None or temp.next.val not in num_set)):
+                compo += 1
+            temp = temp.next
+        
+        return compo
+    
+    
+sol = Solution()
+
+nums = [0,3,1,4]
+
+
+node4 = ListNode(4)
+node3 = ListNode(3, node4)
+node2 = ListNode(2, node3)
+node1 = ListNode(1, node2)
+head = ListNode(0, node1)
+
+print(sol.numComponents(head, nums))
