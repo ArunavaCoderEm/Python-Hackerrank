@@ -1088,3 +1088,33 @@ class Solution:
 sol = Solution()
 board = ["XXX","   ","OOO"]
 print(sol.validTicTacToe(board))
+
+
+class Solution:
+    def reverseParentheses(self, s: str) -> str:
+
+        stk = [] 
+        
+        que = []
+        
+        for i in s:
+            if (i != ")"):
+                stk.append(i)
+            if (i == ")"):
+                popstk = stk.pop()
+                while (popstk != "("):
+                    que.append(popstk)
+                    popstk = stk.pop()
+                    
+            while(len(que)):
+                popque = que.pop(0)
+                stk.append(popque)
+        
+        retstr = "".join(stk)
+        return retstr
+        
+# drivers code
+
+sol = Solution()
+driverip = "(ed(et(oc))el)"
+print(sol.reverseParentheses(driverip))
