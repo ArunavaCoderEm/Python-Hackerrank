@@ -1193,3 +1193,48 @@ node1 = ListNode(1, node2)
 head = ListNode(0, node1)
 
 print(sol.numComponents(head, nums))
+
+
+## Ezz bit manipulation 
+## xor is 1 when between different bits 
+## that's why the differbits function acts like that
+
+def differbits(m, n):
+    difbit = m ^ n
+    difbitbin = bin(difbit)[2:]
+    res = difbitbin.count('1')
+    return res
+    
+class Solution:
+    def totalHammingDistance(self, nums: List[int]) -> int:
+        totalhamdist = 0
+        for i in range(32): 
+            count = 0
+            flag = (1 << i)
+            for num in nums:
+                if (num & flag):
+                    count += 1
+            totalhamdist += count * (len(nums) - count)
+        return totalhamdist
+
+## same brute force that got TLE
+from typing import List
+
+def differbits(m, n):
+    difbit = m ^ n
+    difbitbin = bin(difbit)[2:]
+    res = difbitbin.count('1')
+    return res
+    
+class Solution:
+    def totalHammingDistance(self, nums: List[int]) -> int:
+        totalhamdist = 0
+        for i in range (0, len(nums) - 1):
+            for j in range (i + 1, len(nums)):
+                res = differbits(nums[i], nums[j])
+                totalhamdist += res
+        return totalhamdist
+             
+sol = Solution()
+nums = [4,14,2]
+print(sol.totalHammingDistance(nums))
