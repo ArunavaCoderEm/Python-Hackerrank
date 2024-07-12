@@ -1274,3 +1274,100 @@ class Solution:
 sol = Solution()
 s = "aA"
 print(sol.reverseVowels(s))
+
+def remstr (s, top, next, greed):
+
+    stk = []
+    res = 0
+
+    for i in s:
+        if (len(stk) and stk[-1] == top and i == next):
+            stk.pop()
+            res += greed
+        else :
+            stk.append(i)
+    
+    ans = ''.join(stk)
+    
+    return [ans, res]
+
+class Solution:
+    def maximumGain(self, s: str, x: int, y: int) -> int:
+
+        if (not len(s)): return 0
+        if (x == 0 and y == 0): return 0
+        
+        # if my greed is x 
+        if (x > y) :
+            pt1 = remstr(s, 'a', 'b', x)[1]
+            s = remstr(s, 'a', 'b', x)[0]
+            pt2 = remstr(s, 'b', 'a', y)[1]
+            s = remstr(s, 'b', 'a', y)[0]
+            
+        # if not   
+        elif (y > x) :
+            pt1 = remstr(s, 'a', 'b', y)[1]
+            s = remstr(s, 'a', 'b', y)[0]
+            pt2 = remstr(s, 'b', 'a', x)[1]
+            s = remstr(s, 'b', 'a', x)[0]
+        
+        return pt1 + pt2
+            
+        
+sol = Solution()
+s = "cdbcbbaaabab"
+x = 4
+y = 5
+print(sol.maximumGain(s,x,y))
+
+from typing import List
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        
+        zercount = nums.count(0)
+        
+        newlist = []
+        
+        for i in nums:
+            if (i != 0):
+                newlist.append(i)
+        
+        res = newlist + ([0]*zercount)
+        
+        nums = res[:]
+            
+
+sol = Solution()
+nums = [0,1,0,3,12]
+print(sol.moveZeroes(nums))
+
+from typing import List
+
+class Solution:
+    def maxOperations(self, nums: List[int], k: int) -> int:
+
+        if(not len(nums)): return 0
+
+        nums.sort()
+        ope = 0
+        
+        i = 0
+        j = len(nums) - 1
+        
+        while (i < j):
+            
+            if (nums[i] + nums[j] < k):
+                i += 1
+            elif (nums[i] + nums[j] > k):
+                j -= 1
+            elif (nums[i] + nums[j] == k):
+                ope += 1
+                i += 1
+                j -= 1
+        
+        return ope                
+    
+sol = Solution()
+nums = [3,1,3,4,3]
+k = 6
+print(sol.maxOperations(nums,k))        
