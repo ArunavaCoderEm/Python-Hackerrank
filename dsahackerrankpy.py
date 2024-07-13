@@ -1578,3 +1578,70 @@ class Solution:
 sol = Solution()
 s = "VIII"
 print(sol.romanToInt(s))
+
+
+##
+
+
+from typing import List
+
+def givepos(posarr):
+    return posarr[0]
+
+class Solution:
+    def survivedRobotsHealths(self, positions: List[int], healths: List[int], directions: str) -> List[int]:
+        
+        stk = []
+
+        robotstats = []
+
+        for i in range(len(positions)):
+            ans = [positions[i], healths[i], directions[i], i]      
+            robotstats.append(ans)
+            
+        print(robotstats)
+        
+        robotstatssort = sorted(robotstats, key = givepos)
+
+        for j in robotstatssort:
+
+            if (j[2] == 'L'):
+
+                while (len(stk) and stk[-1][2] == 'R' and stk[-1][1] < j[1]):
+                    stk.pop()
+                    j[1] = j[1] - 1
+                    
+                if (not len(stk) or stk[-1][2] == 'L'):
+                    stk.append(j)
+                    
+                elif (len(stk) and stk[-1][1] == j[1]):
+                    stk.pop()
+                    
+                elif (len(stk) and stk[-1][1] > j[1]):
+                    stk[-1][1] -= 1
+                    
+            else :
+                stk.append(j)
+                
+        retres = []
+        
+        for k in stk:
+            retres.append(k[1])
+            
+            
+        if (not len(retres)): return []
+            
+        healths_index = {element: index for index, element in enumerate(healths)}
+
+        ordered_retres = sorted(retres, key=lambda x: healths_index[x])
+        
+        return ordered_retres
+
+        
+        
+
+sol = Solution()
+pos = [1,2,5,6]
+he = [10,10,11,11]
+dire = "RLRL"
+print(sol.survivedRobotsHealths(pos, he, dire))
