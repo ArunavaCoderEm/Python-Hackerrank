@@ -1655,31 +1655,25 @@ class Solution:
 
         for i in range (1, len(ast)):
             
-            if (not len(stack) or (stack[-1] > 0 and ast[i] > 0) or (stack[-1] < 0 and ast[i] < 0)):
+            if (not len(stack) or ((stack[-1] > 0 and ast[i] > 0) or (stack[-1] < 0 and ast[i] < 0))):
 
                 stack.append(ast[i])
-                if(i == 1): print("HI11")
 
             else :
                 if (abs(stack[-1]) > abs(ast[i])):
-                    if(i == 1): print("HI")
                     continue
                 
                 elif (abs(stack[-1]) < abs(ast[i])):
-                    
-                    if(i == 1): print("HI")
 
                     while (len(stack) and abs(stack[-1]) < abs(ast[i]) and (ast[i] < 0 and stack[-1] > 0) or (ast[i] > 0 and stack[-1] < 0)):
+                        print("hi")
                         stack.pop()
                         
-                    if (not stack or stack[-1] < 0):
+                    if (not len(stack) or ((stack[-1] > 0 and ast[i] > 0) or (stack[-1] < 0 and ast[i] < 0))):
                         stack.append(ast[i])
                         
                 elif (abs(stack[-1]) == abs(ast[i])):
-                    
-                        if(i == 1): print("HI")
                         stack.pop()
-                        print("HI", stack)
                         continue
                     
         return stack
