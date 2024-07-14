@@ -1683,4 +1683,101 @@ sol = Solution()
 ast = [-2,2,1,-2]
 
 print(sol.asteroidCollision(ast))
+
+# from typing import List
                         
+                        
+# class Solution:
+#     def asteroidCollision(self, ast: List[int]) -> List[int]:
+        
+#         stack = [ast[0]]
+
+#         for i in range (1, len(ast)):
+            
+#             if (not len(stack) or ((stack[-1] > 0 and ast[i] > 0) or (stack[-1] < 0 and ast[i] < 0))):
+
+#                 stack.append(ast[i])
+
+
+
+
+from typing import List, Optional
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution:  
+
+    def modifiedList(self, nums: List[int], head: Optional[ListNode]) -> Optional[ListNode]:
+        
+        nums_set = set(nums)
+        
+        print(nums_set)
+        
+        if (not head): return None
+        
+        
+        while (head.val in nums_set):
+            head = head.next
+        
+        temp = head
+
+        while (temp.next != None):
+            
+            if (temp.next.val in nums_set):
+                temp.next = temp.next.next
+            else:
+                temp = temp.next
+                
+        return head
+
+# Another approach
+
+def appendll (head, new_data):
+
+        new_node = ListNode(new_data)
+
+        if head is None:
+            head = new_node
+            return
+        last = head
+        while (last.next):
+            last = last.next
+ 
+        last.next = new_node
+
+        return head
+    
+    
+class Solution:
+    def modifiedList(self, nums: List[int], head: Optional[ListNode]) -> Optional[ListNode]:
+        
+        nums_set = set(nums)
+        
+        print(nums_set)
+        
+        rethead = ListNode(None)
+        
+        if (not head): return None
+        
+        while (head != None):
+            if (head.val not in nums_set):
+                print("hi")
+                rethead = appendll(rethead, head.val)
+                print(head.val)
+            head = head.next
+                
+        return rethead.next
+
+                
+                
+sol = Solution()
+nums = [1,2,3]
+head4 = ListNode(5)
+head3 = ListNode(4, head4)
+head2 = ListNode(3, head3)
+head1 = ListNode(2, head2)
+head = ListNode(1, head1)
+print(sol.modifiedList(nums,head))
