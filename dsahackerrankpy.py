@@ -1781,3 +1781,78 @@ head2 = ListNode(3, head3)
 head1 = ListNode(2, head2)
 head = ListNode(1, head1)
 print(sol.modifiedList(nums,head))
+
+
+from typing import List, Optional
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+        
+class Solution:
+    def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
+
+        res = []
+        temp = head
+        while (temp != None):
+            res.append(temp.val)
+            temp = temp.next
+
+        print(res)
+        
+        m = res.index(x)
+        if (m == -1): return None
+        
+        le, ri = 0, m+1
+        
+        while (le <= m or ri < len(res)):
+            
+            if (res[le] < x and res[ri]):
+                le += 1
+
+sol = Solution()
+x = 3
+head5 = ListNode(2)
+head4 = ListNode(5,head5)
+head3 = ListNode(2,head4)
+head2 = ListNode(3,head3)
+head1 = ListNode(4,head2)
+head = ListNode(1,head1)
+print(sol.partition(head, x)) 
+
+from typing import List
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        
+        def checkprofit(idx, allowbuy, dyp):
+            
+            if (idx == len(prices)): return 0
+            
+            if (dyp[idx][allowbuy] != -1): return dyp[idx][allowbuy]
+
+            if (allowbuy):
+                profit = max(-prices[idx] + checkprofit(idx + 1, 0, dyp), checkprofit(idx + 1, 1, dyp))
+            else:
+                profit = max(prices[idx] + checkprofit(idx + 1, 1, dyp), checkprofit(idx + 1, 0, dyp))
+    
+            dyp[idx][allowbuy] = profit
+
+            return profit 
+        
+        n = len(prices)
+        dyp = []
+        for _ in range(n):
+            dyp.append([-1,-1])
+            
+        print(dyp)
+
+        resprof = checkprofit(0, 1, dyp)
+        
+        return resprof
+        
+        
+sol = Solution()
+prices = [7,1,5,3,6,4]
+print(sol.maxProfit(prices))
