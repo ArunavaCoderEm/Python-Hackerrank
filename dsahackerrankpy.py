@@ -1822,33 +1822,37 @@ head = ListNode(1,head1)
 print(sol.partition(head, x)) 
 
 from typing import List
+import numpy as np
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         
-        def checkprofit(idx, allowbuy, dyp):
+        def checkprofit(idx, allowbuy, dyp, lt, lim):
             
             if (idx == len(prices)): return 0
             
-            if (dyp[idx][allowbuy] != -1): return dyp[idx][allowbuy]
+            if (lt >= lim): return 0
+            
+            if (dyp[idx][allowbuy][lt] != -1): return dyp[idx][allowbuy][lt]
 
             if (allowbuy):
-                profit = max(-prices[idx] + checkprofit(idx + 1, 0, dyp), checkprofit(idx + 1, 1, dyp))
+                profit = max(-prices[idx] + checkprofit(idx + 1, 0, dyp, lt, lim), checkprofit(idx + 1, 1, dyp, lt, lim))
             else:
-                profit = max(prices[idx] + checkprofit(idx + 1, 1, dyp), checkprofit(idx + 1, 0, dyp))
+                profit = max(prices[idx] + checkprofit(idx + 1, 1, dyp, lt + 1, lim), checkprofit(idx + 1, 0, dyp, lt, lim))
     
-            dyp[idx][allowbuy] = profit
+            dyp[idx][allowbuy][lt] = profit
 
             return profit 
         
         n = len(prices)
-        dyp = []
-        for _ in range(n):
-            dyp.append([-1,-1])
-            
+        
+        dimensions = (n, 2, 3) 
+
+        dyp = np.full(dimensions, -1)
+
         print(dyp)
 
-        resprof = checkprofit(0, 1, dyp)
+        resprof = checkprofit(0, 1, dyp, 0, 2)
         
         return resprof
         
@@ -1856,3 +1860,65 @@ class Solution:
 sol = Solution()
 prices = [7,1,5,3,6,4]
 print(sol.maxProfit(prices))
+
+from typing import List
+class Solution:
+    def shortestSubarray(self, nums: List[int], k: int) -> int:
+        
+        i = 0
+        j = i + 1
+
+        while (i <= len(nums)):
+            print(nums[i:j])
+            if(sum(nums[i:j]) >= k):
+                return len(nums[i:j])
+
+            else: j += 1
+            if (j > len(nums)):
+
+                i += 1
+                j = i + 1
+
+        return -1
+
+sol = Solution()
+print(sol.shortestSubarray([2,-1,2],3))
+
+from typing import List
+
+class Solution:
+    def nextGreaterElements(self, nums: List[int]) -> List[int]:
+        
+        res = [-1]*len(nums)
+        mx = max(nums)
+        m = nums.index(mx)
+        res[0] = nums[0]
+        if (m+1 < len(nums)):
+            res[m + 1] = mx
+        i = 0
+        j = 0
+        
+        
+        while (i < len(nums)):
+                
+            if (i == m + 1 or i == m): 
+                i += 1
+                if (i >= len(nums)): break
+            
+            elif (nums[i] >= nums[j]):
+                j += 1    
+                if (j >= len(nums)): j = 0    
+                
+            else:
+                res[i] = nums[j]
+                i += 1
+                j = i + 1
+                if (j >= len(nums)): j = 0
+        
+        res[m] = -1
+                
+        return res
+    
+sol = Solution()
+res = [1,5,3,6,8]
+print(sol.nextGreaterElements(res))
