@@ -1937,3 +1937,53 @@ class Solution:
 s = "ACBBD"               
 sol = Solution()
 print(sol.minLength(s))
+
+import re
+
+class Solution:
+    def countValidWords(self, sentence: str) -> int:
+        
+        punc = "!"
+        nums = "1234567890"
+        
+        allowed = ".-"
+        
+        if (len(sentence) == 1 and sentence[0] in nums or sentence[0] in punc or sentence[0] in allowed): return 0
+
+        split_sen = re.split(r'\s+', sentence)
+        
+        print(split_sen)
+
+        count = 0
+
+        for i in split_sen:
+            if (any(char in punc for char in i) or any(char in nums for char in i)):
+                count += 1
+        return len(split_sen) - count
+    
+s = "he bought 2 pencils, 3 erasers, and 1  pencil-sharpener."               
+sol = Solution()
+print(sol.countValidWords(s))
+
+class Solution:
+    def checkIfCanBreak(self, s1: str, s2: str) -> bool:
+
+        ress1 = ''.join(sorted(s1))
+        ress2 = ''.join(sorted(s2))
+        
+        can_s1 = True
+        can_s2 = True
+        
+        for i in range(len(ress1)):
+            if (ress1[i] < ress2[i]):
+                can_s1 = False
+            if (ress2[i] < ress1[i]):
+                can_s2 = False
+        
+        return can_s1 or can_s2
+
+
+s1 = "abc"
+s2 = "xya"
+sol = Solution()
+print(sol.checkIfCanBreak(s1, s2))
