@@ -1987,3 +1987,48 @@ s1 = "abc"
 s2 = "xya"
 sol = Solution()
 print(sol.checkIfCanBreak(s1, s2))
+
+from typing import List
+
+def arrStartDep(arr):
+    st = []
+    en = []
+    for i in arr:
+        st.append(i[0])  
+        en.append(i[1]) 
+    return [st, en]
+
+def returnSmallest(arr):
+    return arr[0]
+
+class Solution:
+    def smallestChair(self, times: List[List[int]], targetFriend: int) -> int:
+        
+        n = len(times)
+        chairs = [False] * n
+        
+        arrival, departure = arrStartDep(times)
+
+        indexed_times = [(times[i][0], times[i][1], i) for i in range(n)]
+        
+        indexed_times.sort(key= returnSmallest)  
+        
+        for arrival, departure, original_index in indexed_times:
+            for k in range(n):
+                if chairs[k] and departure <= arrival:
+                    chairs[k] = False  
+            
+            for j in range(n):
+                if not chairs[j]: 
+                    chairs[j] = True  
+                    break
+            
+            if original_index == targetFriend:
+                return j  
+
+        
+            
+sol = Solution()
+times = [[3,10],[1,5],[2,6]]
+targetFriend = 0
+print(sol.smallestChair(times, targetFriend))
